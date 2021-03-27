@@ -1,7 +1,7 @@
 package cn.zcbigdata.mybits_demo.entity;
 
 //发布的毕设题目表
-public class FinalTitle {
+public class TeacherTitle {
 
   private long id;
   private String cno;
