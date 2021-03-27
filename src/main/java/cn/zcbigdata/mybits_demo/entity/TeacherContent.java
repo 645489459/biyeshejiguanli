@@ -34,4 +34,12 @@ public class TeacherContent {
     this.content = content;
   }
 
+  @Override
+  public String toString() {
+    return "TeacherContent{" +
+            "id=" + id +
+            ", cno='" + cno + '\'' +
+            ", content='" + content + '\'' +
+            '}';
+  }
 }

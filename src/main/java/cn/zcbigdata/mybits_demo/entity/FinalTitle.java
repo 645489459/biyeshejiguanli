@@ -34,4 +34,12 @@ public class FinalTitle {
     this.content = content;
   }
 
+  @Override
+  public String toString() {
+    return "FinalTitle{" +
+            "id=" + id +
+            ", cno='" + cno + '\'' +
+            ", content='" + content + '\'' +
+            '}';
+  }
 }

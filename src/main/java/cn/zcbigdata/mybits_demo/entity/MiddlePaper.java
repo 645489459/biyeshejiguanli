@@ -44,4 +44,13 @@ public class MiddlePaper {
     this.remark = remark;
   }
 
+  @Override
+  public String toString() {
+    return "MiddlePaper{" +
+            "id=" + id +
+            ", sno='" + sno + '\'' +
+            ", cnotent='" + cnotent + '\'' +
+            ", remark='" + remark + '\'' +
+            '}';
+  }
 }

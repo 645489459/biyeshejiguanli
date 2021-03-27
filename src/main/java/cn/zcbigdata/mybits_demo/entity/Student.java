@@ -64,4 +64,15 @@ public class Student {
     this.flag = flag;
   }
 
+  @Override
+  public String toString() {
+    return "Student{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", password='" + password + '\'' +
+            ", sno='" + sno + '\'' +
+            ", cno='" + cno + '\'' +
+            ", flag='" + flag + '\'' +
+            '}';
+  }
 }

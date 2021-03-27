@@ -44,4 +44,13 @@ public class OpeningReport {
     this.remark = remark;
   }
 
+  @Override
+  public String toString() {
+    return "OpeningReport{" +
+            "id=" + id +
+            ", sno='" + sno + '\'' +
+            ", cnotent='" + cnotent + '\'' +
+            ", remark='" + remark + '\'' +
+            '}';
+  }
 }

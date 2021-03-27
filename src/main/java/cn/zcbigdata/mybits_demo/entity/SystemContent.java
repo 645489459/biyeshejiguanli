@@ -24,4 +24,11 @@ public class SystemContent {
     this.content = content;
   }
 
+  @Override
+  public String toString() {
+    return "SystemContent{" +
+            "id=" + id +
+            ", content='" + content + '\'' +
+            '}';
+  }
 }
