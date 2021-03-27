@@ -6,6 +6,7 @@ public class StudentTitle {
   private long id;
   private String sno;
   private String content;//学生选择的毕设题目
+  private String status;//状态
 
 
   public long getId() {
@@ -34,12 +35,21 @@ public class StudentTitle {
     this.content = content;
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
   @Override
   public String toString() {
     return "StudentTitle{" +
             "id=" + id +
             ", sno='" + sno + '\'' +
             ", content='" + content + '\'' +
+            ", status='" + status + '\'' +
             '}';
   }
 }

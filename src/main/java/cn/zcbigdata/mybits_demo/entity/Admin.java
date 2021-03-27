@@ -6,7 +6,7 @@ public class Admin {
   private long id;
   private String name;
   private String password;
-  private String con;
+  private String cno;
   private String flag;
 
 
@@ -38,11 +38,11 @@ public class Admin {
 
 
   public String getCon() {
-    return con;
+    return cno;
   }
 
-  public void setCon(String con) {
-    this.con = con;
+  public void setCon(String cno) {
+    this.cno = cno;
   }
 
 
@@ -60,7 +60,7 @@ public class Admin {
             "id=" + id +
             ", name='" + name + '\'' +
             ", password='" + password + '\'' +
-            ", con='" + con + '\'' +
+            ", con='" + cno + '\'' +
             ", flag='" + flag + '\'' +
             '}';
   }
