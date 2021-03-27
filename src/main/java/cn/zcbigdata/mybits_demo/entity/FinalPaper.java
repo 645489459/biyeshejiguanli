@@ -7,6 +7,7 @@ public class FinalPaper {
   private String sno;
   private String content;//最终论文内容
   private String remark;//教师评分
+  private String status;//状态
 
 
   public long getId() {
@@ -27,11 +28,11 @@ public class FinalPaper {
   }
 
 
-  public String getCnotent() {
+  public String getContent() {
     return content;
   }
 
-  public void setCnotent(String cnotent) {
+  public void setContent(String cnotent) {
     this.content = cnotent;
   }
 
@@ -42,6 +43,14 @@ public class FinalPaper {
 
   public void setRemark(String remark) {
     this.remark = remark;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   @Override

@@ -7,6 +7,7 @@ public class OpeningReport {
   private String sno;
   private String content;//开题报告内容
   private String remark;//教师评语
+  private String status;//状态
 
 
   public long getId() {
@@ -27,11 +28,11 @@ public class OpeningReport {
   }
 
 
-  public String getCnotent() {
+  public String getContent() {
     return content;
   }
 
-  public void setCnotent(String cnotent) {
+  public void setContent(String cnotent) {
     this.content = cnotent;
   }
 
@@ -42,6 +43,14 @@ public class OpeningReport {
 
   public void setRemark(String remark) {
     this.remark = remark;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   @Override

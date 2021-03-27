@@ -7,6 +7,7 @@ public class MiddlePaper {
   private String sno;
   private String content;//中期论文
   private String remark;//教师评语
+  private String status;//状态
 
 
   public long getId() {
@@ -16,8 +17,7 @@ public class MiddlePaper {
   public void setId(long id) {
     this.id = id;
   }
-
-
+  
   public String getSno() {
     return sno;
   }
@@ -27,11 +27,11 @@ public class MiddlePaper {
   }
 
 
-  public String getCnotent() {
+  public String getContent() {
     return content;
   }
 
-  public void setCnotent(String cnotent) {
+  public void setContent(String cnotent) {
     this.content = cnotent;
   }
 
@@ -42,6 +42,14 @@ public class MiddlePaper {
 
   public void setRemark(String remark) {
     this.remark = remark;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   @Override

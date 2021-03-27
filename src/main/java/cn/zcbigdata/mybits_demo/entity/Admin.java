@@ -37,11 +37,11 @@ public class Admin {
   }
 
 
-  public String getCon() {
+  public String getCno() {
     return cno;
   }
 
-  public void setCon(String cno) {
+  public void setCno(String cno) {
     this.cno = cno;
   }
 
