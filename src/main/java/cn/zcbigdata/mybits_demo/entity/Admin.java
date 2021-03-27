@@ -1,6 +1,6 @@
 package cn.zcbigdata.mybits_demo.entity;
 
-
+//教师和管理员信息表
 public class Admin {
 
   private long id;

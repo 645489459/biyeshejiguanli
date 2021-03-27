@@ -1,6 +1,6 @@
 package cn.zcbigdata.mybits_demo.entity;
 
-
+//系统公告表
 public class SystemContent {
 
   private long id;

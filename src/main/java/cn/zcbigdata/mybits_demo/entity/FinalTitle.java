@@ -1,11 +1,11 @@
 package cn.zcbigdata.mybits_demo.entity;
 
-
+//发布的毕设题目表
 public class FinalTitle {
 
   private long id;
   private String cno;
-  private String content;
+  private String content;//发布的毕设题目
 
 
   public long getId() {

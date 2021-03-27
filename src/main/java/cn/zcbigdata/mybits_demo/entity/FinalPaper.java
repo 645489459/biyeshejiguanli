@@ -1,12 +1,12 @@
 package cn.zcbigdata.mybits_demo.entity;
 
-
+//最终论文以及教师评分表
 public class FinalPaper {
 
   private long id;
   private String sno;
-  private String cnotent;
-  private String remark;
+  private String content;//最终论文内容
+  private String remark;//教师评分
 
 
   public long getId() {
@@ -28,11 +28,11 @@ public class FinalPaper {
 
 
   public String getCnotent() {
-    return cnotent;
+    return content;
   }
 
   public void setCnotent(String cnotent) {
-    this.cnotent = cnotent;
+    this.content = cnotent;
   }
 
 
@@ -49,7 +49,7 @@ public class FinalPaper {
     return "FinalPaper{" +
             "id=" + id +
             ", sno='" + sno + '\'' +
-            ", cnotent='" + cnotent + '\'' +
+            ", cnotent='" + content + '\'' +
             ", remark='" + remark + '\'' +
             '}';
   }

@@ -1,6 +1,6 @@
 package cn.zcbigdata.mybits_demo.entity;
 
-
+//学生表
 public class Student {
 
   private long id;

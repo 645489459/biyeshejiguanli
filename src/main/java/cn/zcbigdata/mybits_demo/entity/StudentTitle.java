@@ -1,11 +1,11 @@
 package cn.zcbigdata.mybits_demo.entity;
 
-
+//学生选题表
 public class StudentTitle {
 
   private long id;
   private String sno;
-  private String content;
+  private String content;//学生选择的毕设题目
 
 
   public long getId() {

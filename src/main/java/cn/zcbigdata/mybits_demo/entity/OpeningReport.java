@@ -1,12 +1,12 @@
 package cn.zcbigdata.mybits_demo.entity;
 
-
+//开题报告表
 public class OpeningReport {
 
   private long id;
   private String sno;
-  private String cnotent;
-  private String remark;
+  private String content;//开题报告内容
+  private String remark;//教师评语
 
 
   public long getId() {
@@ -28,11 +28,11 @@ public class OpeningReport {
 
 
   public String getCnotent() {
-    return cnotent;
+    return content;
   }
 
   public void setCnotent(String cnotent) {
-    this.cnotent = cnotent;
+    this.content = cnotent;
   }
 
 
@@ -49,7 +49,7 @@ public class OpeningReport {
     return "OpeningReport{" +
             "id=" + id +
             ", sno='" + sno + '\'' +
-            ", cnotent='" + cnotent + '\'' +
+            ", cnotent='" + content + '\'' +
             ", remark='" + remark + '\'' +
             '}';
   }
