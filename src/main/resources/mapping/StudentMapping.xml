@@ -32,7 +32,7 @@
             cno= #{cno}
         where id = #{id}
     </update>
-    <delete id="deleteStu"  parameterType="java.lang.String">
+    <delete id="deleteStu"  parameterType="java.lang.Integer">
         delete from student
         where id = #{id};
     </delete>
