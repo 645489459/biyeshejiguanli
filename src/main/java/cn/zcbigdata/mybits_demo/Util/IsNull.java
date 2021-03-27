@@ -10,14 +10,14 @@ public class IsNull {
     public static boolean checkNull(Object[] args) {
         for (Object arg : args) {
             if (arg == null || arg.toString().trim().length() <= 0) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public static boolean checkNull(Object arg) {
-        return arg == null && arg.toString().trim().length() > 0;
+        return arg != null && arg.toString().trim().length() > 0;
     }
 }
 
