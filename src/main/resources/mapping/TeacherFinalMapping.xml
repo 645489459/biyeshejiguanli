@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zcbigdata.mybits_demo.mapper.TeacherFinalMapper" >
+
+    <resultMap id="BaseResultMap" type="cn.zcbigdata.mybits_demo.entity.TeacherFinal" >
+        <id      column="id"        property="id"        jdbcType="INTEGER" />
+        <result  column="sno"  property="sno"  jdbcType="VARCHAR" />
+        <result  column="content"  property="content"  jdbcType="VARCHAR" />
+        <result  column="status"  property="status"  jdbcType="VARCHAR" />
+        <result  column="remark"  property="status"  jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,sno,content,status,remark
+    </sql>
+
+    <update id="update" parameterType="cn.zcbigdata.mybits_demo.entity.TeacherFinal" >
+        update final_paper
+        set status = #{status,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select final_paper.id,t1.name,t1.sno,final_paper.content,final_paper.status,final_paper.remark
+        from (select * from student where cno = #{param3})t1 inner join final_paper
+        where t1.sno = final_paper.sno
+        limit #{param1},#{param2}
+    </select>
+
+    <select id="selectCount"  resultType="java.lang.Integer" >
+        SELECT count(*)
+        FROM (select * from student where cno = #{param3})t1 inner join final_paper
+        where t1.sno = final_paper.sno;
+    </select>
+
+</mapper>

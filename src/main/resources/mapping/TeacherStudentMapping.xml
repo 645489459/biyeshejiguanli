@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zcbigdata.mybits_demo.mapper.AdminTeacherStudentMapper" >
+
+    <resultMap id="BaseResultMap" type="cn.zcbigdata.mybits_demo.entity.TeacherStudent" >
+        <id      column="id"        property="id"        jdbcType="INTEGER" />
+        <result  column="name"  property="name"  jdbcType="VARCHAR" />
+        <result  column="password"  property="password"  jdbcType="VARCHAR" />
+        <result  column="sno"  property="sno"  jdbcType="VARCHAR" />
+        <result  column="cno"  property="cno"  jdbcType="VARCHAR" />
+        <result  column="flag"  property="flag"  jdbcType="VARCHAR" />
+
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,name,password,sno,cno,flag
+    </sql>
+
+    <insert id="insert" parameterType="cn.zcbigdata.mybits_demo.entity.TeacherStudent" >
+        insert into student (name,password,sno,cno)
+        values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{sno,jdbcType=VARCHAR},#{cno,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from student where cno = #{param3}
+        limit #{param1},#{param2}
+    </select>
+
+    <select id="selectCount"  resultType="java.lang.Integer" >
+        SELECT count(*) FROM student where cno = #{param1};
+    </select>
+
+</mapper>

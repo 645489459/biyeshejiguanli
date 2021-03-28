@@ -30,13 +30,13 @@ public class AdminTeacherController {
     @RequestMapping(value="/login", method=RequestMethod.GET,produces = "text/plain;charset=utf-8")
     protected String doGet(HttpServletRequest request) throws Exception{
 
-        String snoString = request.getParameter("sno");
+        String cnoString = request.getParameter("cno");
         String passwordString = request.getParameter("password");
-        System.out.println(snoString + "************"+passwordString);
+        System.out.println(cnoString + "************"+passwordString);
 
         String data = "";
 
-        if(IsNullUtil.IsNullTrue(snoString)) {
+        if(IsNullUtil.IsNullTrue(cnoString)) {
             System.out.println("用户名为空");
             data = "{\"data\":\"用户名为空\"}";
 
@@ -45,14 +45,13 @@ public class AdminTeacherController {
             data = "{\"data\":\"密码为空\"}";
 
         }else {
-            AdminTeacher adminTeacher = adminTeacherService.login(snoString,passwordString);
-            System.out.println(adminTeacherService.login(snoString,passwordString));//在adminStudent为空的情况下不能用toString方法
+            AdminTeacher adminTeacher = adminTeacherService.login(cnoString,passwordString);
+            System.out.println(adminTeacherService.login(cnoString,passwordString));//在adminStudent为空的情况下不能用toString方法
             if(adminTeacher != null){
                 data = "{\"data\":\"登录成功\"}";
-                HttpSession session1 = request.getSession();
-                HttpSession session2 = request.getSession();
-                session1.setAttribute("cno", adminTeacher.getCno());
-                session2.setAttribute("admin_flag", adminTeacher.getFlag());
+                HttpSession session = request.getSession();
+                session.setAttribute("cno", adminTeacher.getCno());
+                session.setAttribute("admin_flag", adminTeacher.getFlag());
             }else {
                 data = "{\"data\":\"用户名或密码错误\"}";
             }
@@ -63,13 +62,13 @@ public class AdminTeacherController {
     @ResponseBody
     @RequestMapping(value="/insert", method= RequestMethod.GET,produces = "text/plain;charset=utf-8")
     public String insert(HttpServletRequest request) {
-        HttpSession session2=request.getSession();
+        HttpSession session=request.getSession();
         String nameString = request.getParameter("name");
         String passwordString = request.getParameter("password");
         String cnoString = request.getParameter("cno");
         String data = "";
 
-        if(adminFlag.equals(session2.getAttribute("admin_flag"))){
+        if(adminFlag.equals(session.getAttribute("admin_flag"))){
             if(IsNullUtil.IsNullTrue(nameString) && IsNullUtil.IsNullTrue(passwordString) && IsNullUtil.IsNullTrue(cnoString)) {
                 data = "{\"data\":\"您的输入为空，请重新输入\"}";
             }else {
@@ -92,14 +91,14 @@ public class AdminTeacherController {
     @ResponseBody
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String selectAll(HttpServletRequest request) throws Exception {
-        HttpSession session2=request.getSession();
+        HttpSession session=request.getSession();
         String pageString = request.getParameter("page");
         String limitString = request.getParameter("limit");
         Integer pageInteger = Integer.valueOf(pageString);
         Integer limitInteger = Integer.valueOf(limitString);
         System.out.println(pageString + limitString);
         String data="";
-        if(adminFlag.equals(session2.getAttribute("admin_flag"))){
+        if(adminFlag.equals(session.getAttribute("admin_flag"))){
             List<AdminTeacher> listsList = adminTeacherService.selectAll(pageInteger,limitInteger);
             if(listsList != null) {
                 System.out.println("能拿到数据");
@@ -133,8 +132,8 @@ public class AdminTeacherController {
         String  idString = request.getParameter("id");
         Integer idInteger = Integer.valueOf(idString);
         String data="";
-        HttpSession session2=request.getSession();
-        if(adminFlag.equals(session2.getAttribute("admin_flag"))){
+        HttpSession session=request.getSession();
+        if(adminFlag.equals(session.getAttribute("admin_flag"))){
             adminTeacherService.delete(idInteger);
             data = "{\"data\":\"删除成功\"}";
         }else {
@@ -152,8 +151,8 @@ public class AdminTeacherController {
         String cnoString = request.getParameter("cno");
         Integer idInteger = Integer.valueOf(idString);
         String data = "";
-        HttpSession session2=request.getSession();
-        if(adminFlag.equals(session2.getAttribute("admin_flag"))){
+        HttpSession session=request.getSession();
+        if(adminFlag.equals(session.getAttribute("admin_flag"))){
             AdminTeacher adminTeacher = new AdminTeacher();
             adminTeacher.setId(idInteger);
             adminTeacher.setPassword(passwordString);
