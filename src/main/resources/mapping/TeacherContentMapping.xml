@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zcbigdata.mybits_demo.mapper.TeacherContentMapper">
+
+    <resultMap id="BaseResultMap" type="cn.zcbigdata.mybits_demo.entity.TeacherContent">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="cno" jdbcType="VARCHAR" property="cno"/>
+        <result column="content" jdbcType="VARCHAR" property="content" />
+    </resultMap>
+
+    <select id="selectTcn" resultMap="BaseResultMap" parameterType="cn.zcbigdata.mybits_demo.entity.TeacherContent">
+        select * from teacher_content where cno=#{cno}
+    </select>
+    <insert id="insertTcn" parameterType="java.lang.String">
+        insert into teacher_content (cno,content)
+        values (#{cno},#{content})
+    </insert>
+
+
+
+</mapper>

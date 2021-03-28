@@ -83,6 +83,7 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute("flag", student.getFlag());
             session.setAttribute("sno", student.getSno());
+            session.setAttribute("cno",student.getCno());
             return ObjtoLayJson.objectToJson(cloums,student);
         } else {
             data = "{\"code\":\"300\",\"message\":\"登录失败,请检查用户名和密码\"}";
