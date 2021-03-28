@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zcbigdata.mybits_demo.mapper.StudentTitleMapper">
+
+    <resultMap id="BaseResultMap" type="cn.zcbigdata.mybits_demo.entity.StudentTitle">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="sno" jdbcType="VARCHAR" property="sno" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+    </resultMap>
+    <resultMap id="VoMap" type="cn.zcbigdata.mybits_demo.entity.StudentTitleVo">
+        <result column="stu_title_id" jdbcType="INTEGER" property="stuTitleId" />
+        <result column="sno" jdbcType="VARCHAR" property="sno" />
+        <result column="cno" jdbcType="VARCHAR" property="cno" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+    </resultMap>
+
+    <select id="selectStuTitList" resultMap="VoMap" parameterType="java.lang.String">
+        select st.id as stu_title_id ,st.sno,stu.cno,stu.name,st.content,st.status
+        from student_title st inner join student stu on st.sno=stu.sno
+        where stu.cno=#{cno}
+    </select>
+    <insert id="InsertStuTit" parameterType="cn.zcbigdata.mybits_demo.entity.StudentTitle">
+        insert into student_title (sno,content)
+        values (#{sno}, #{content})
+    </insert>
+    <update id="updateStuTit" parameterType="cn.zcbigdata.mybits_demo.entity.StudentTitle">
+        update student_title
+        set status = #{status},
+        where id = #{id}
+    </update>
+
+
+
+</mapper>

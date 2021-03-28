@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zcbigdata.mybits_demo.mapper.MiddlePaperMapper">
+
+    <resultMap id="BaseResultMap" type="cn.zcbigdata.mybits_demo.entity.MiddlePaper">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="sno" jdbcType="VARCHAR" property="sno" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+    </resultMap>
+    <resultMap id="VoMap" type="cn.zcbigdata.mybits_demo.entity.ReportPaperVo">
+        <result column="ope_title_id" jdbcType="INTEGER" property="stuTitleId" />
+        <result column="sno" jdbcType="VARCHAR" property="sno" />
+        <result column="cno" jdbcType="VARCHAR" property="cno" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+    </resultMap>
+
+    <select id="selectMidPapList" resultMap="VoMap" parameterType="java.lang.String">
+        select or.id as ope_title_id ,or.sno,stu.cno,stu.name,or.content,or.status,or.remark
+        from middle_paper or inner join student stu on st.sno=stu.sno
+        where stu.cno=#{cno}
+    </select>
+    <insert id="InsertMidPap" parameterType="cn.zcbigdata.mybits_demo.entity.MiddlePaper">
+        insert into middle_paper (sno,content)
+        values (#{sno}, #{content})
+    </insert>
+    <update id="updateMidPap" parameterType="cn.zcbigdata.mybits_demo.entity.MiddlePaper">
+        update middle_paper
+        set status = #{status},
+            where id = #{id}
+    </update>
+
+
+
+</mapper>
