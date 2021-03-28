@@ -15,6 +15,11 @@ public interface AdminMapper {
     List<Admin>selectAllAdm();
 
     /**
+     * 用于登陆查询
+     * @return  Admin类型
+     */
+    Admin adminLogin(Admin admin);
+    /**
      *  添加管理员或教师
      * @param admin
      * @return Integer类型数据

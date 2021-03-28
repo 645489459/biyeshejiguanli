@@ -13,19 +13,21 @@
     <select id="selectAllAdm" resultMap="BaseResultMap">
         select * from admin
     </select>
-
-    <insert id="InsertAdm" parameterType="java.lang.String">
+    <select id="adminLogin" resultMap="BaseResultMap">
+        select * from admin where cno=#{cno} and password=#{password}
+    </select>
+    <insert id="InsertAdm" parameterType="cn.zcbigdata.mybits_demo.entity.Admin">
         insert into admin (name,password,sno,cno)
         values (#{name}, #{password},#{cno})
     </insert>
-    <update id="UpdateAdm" parameterType="java.lang.String">
+    <update id="UpdateAdm" parameterType="cn.zcbigdata.mybits_demo.entity.Admin">
         update admin
         set name = #{name},
             password = #{password},
             cno= #{cno}
         where id = #{id}
     </update>
-    <delete id="DeleteAdm"  parameterType="java.lang.String">
+    <delete id="DeleteAdm"  parameterType="java.lang.Integer">
         delete from admin
         where id = #{id};
     </delete>

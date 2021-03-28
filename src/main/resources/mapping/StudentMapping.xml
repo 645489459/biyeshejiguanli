@@ -20,11 +20,14 @@
     <select id="studentSelectStu" resultMap="BaseResultMap" parameterType="java.lang.String">
         select * from student where sno=#{sno}
     </select>
-    <insert id="InsertStu" parameterType="java.lang.String">
+    <select id="loginSelect" resultMap="BaseResultMap" parameterType="cn.zcbigdata.mybits_demo.entity.Student">
+        select * from student where sno=#{sno} AND password=#{password}
+    </select>
+    <insert id="InsertStu" parameterType="cn.zcbigdata.mybits_demo.entity.Student">
         insert into student (name,password,sno,cno)
         values (#{name}, #{password},#{sno},#{cno})
     </insert>
-    <update id="UpdateStu" parameterType="java.lang.String">
+    <update id="UpdateStu" parameterType="cn.zcbigdata.mybits_demo.entity.Student">
         update student
         set name = #{name},
             password = #{password},

@@ -50,6 +50,17 @@ public class StudentServiceImpl implements StudentService {
     }
 
     /**
+     * 登录查询
+     *
+     * @param student
+     * @return
+     */
+    @Override
+    public Student loginSelect(Student student) {
+        return this.studentMapper.loginSelect(student);
+    }
+
+    /**
      * 插入单个学生信息
      *
      * @param stu 学生信息

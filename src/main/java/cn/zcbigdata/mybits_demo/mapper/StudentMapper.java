@@ -31,10 +31,17 @@ public interface StudentMapper {
     Student studentSelectStu(String sno);
 
     /**
+     * 登录查询
+      * @param student
+     * @return
+     */
+    Student loginSelect(Student student);
+    /**
      * 插入单个学生信息
      * @param stu 学生信息
      * @return  int数值
      */
+
     Integer InsertStu(Student stu);
 
     /**

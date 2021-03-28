@@ -22,6 +22,16 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
+     * 用于登陆查询
+     *
+     * @return Admin类型
+     */
+    @Override
+    public Admin adminLogin(Admin admin) {
+        return this.adminMapper.adminLogin(admin);
+    }
+
+    /**
      * 添加管理员或教师
      *
      * @param admin
