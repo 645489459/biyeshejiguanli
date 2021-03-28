@@ -30,7 +30,7 @@ public class AdminController {
             List<Admin> admins=adminService.selectAllAdm();
             String []cloms={"id","name","password","cno","flag"};
             data= ObjtoLayJson.ListtoJson(admins,cloms);
-        }
+       }
 
         return data;
     }
@@ -38,21 +38,20 @@ public class AdminController {
     public String InsertAdm(HttpSession session, HttpServletRequest request){
         String flag=session.getAttribute("flag").toString();
         String data="{\"code\":\"300\",\"message\":\"失败\"}";
-        if (IS_ADMIN.equals(flag)){
-            String name=request.getParameter("name");
-            String password=request.getParameter("password");
-            String cno=request.getParameter("cno");
-            if(IsNull.checkNull(new  String[]{name,password,cno} )){
-                Admin admin=new Admin();
+        if (IS_ADMIN.equals(flag)) {
+            String name = request.getParameter("name");
+            String password = request.getParameter("password");
+            String cno = request.getParameter("cno");
+            if (IsNull.checkNull(new String[]{name, password, cno})) {
+                Admin admin = new Admin();
                 admin.setName(name);
                 admin.setPassword(password);
                 admin.setCno(cno);
-                int count=adminService.InsertAdm(admin);
-                if (count==0){
-                    data="{\"code\":\"300\",\"message\":\"失败\"}";
-                }
-                else {
-                    data="{\"code\":\"200\",\"message\":\"成功\"}";
+                int count = adminService.InsertAdm(admin);
+                if (count == 0) {
+                    data = "{\"code\":\"300\",\"message\":\"失败\"}";
+                } else {
+                    data = "{\"code\":\"200\",\"message\":\"成功\"}";
                 }
             }
         }

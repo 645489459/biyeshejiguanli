@@ -2,7 +2,6 @@ package cn.zcbigdata.mybits_demo.controller;
 
 import cn.zcbigdata.mybits_demo.Util.IsNull;
 import cn.zcbigdata.mybits_demo.Util.ObjtoLayJson;
-import cn.zcbigdata.mybits_demo.Util.SessionUtils;
 import cn.zcbigdata.mybits_demo.entity.Admin;
 import cn.zcbigdata.mybits_demo.entity.Student;
 import cn.zcbigdata.mybits_demo.service.AdminService;
@@ -15,19 +14,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 /**
  * @author admin
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/User")
 public class LoginController {
     @Autowired
     private StudentService studentService;
+    @Autowired
     private AdminService adminService;
 
-    @RequestMapping("/toLogin")
+    @RequestMapping("/tologin")
     public String login() throws Exception {
         return "login";
     }
@@ -67,24 +66,24 @@ public class LoginController {
     @ResponseBody
     public String teacherLogin(HttpServletRequest request)  {
         String data = "";
-        String sno = request.getParameter("sno");
+        String cno = request.getParameter("cno");
         String password = request.getParameter("password");
-        if (!IsNull.checkNull(new String[]{sno, password})) {
+        if (!IsNull.checkNull(new String[]{cno, password})) {
             data = "{\"code\":\"300\",\"message\":\"登陆失败\"}";
             return data;
         }
-        Student student = new Student();
-        student.setSno(sno);
-        student.setPassword(password);
-        String[] cloums = {"id", "name",  "sno", "cno"};
-        student = studentService.loginSelect(student);
+        Admin admin=new Admin();
+        admin.setCno(cno);
+        admin.setPassword(password);
+        String[] cloums = {"id", "name", "cno"};
+        admin = adminService.adminLogin(admin);
+        System.out.println(admin.toString());
 
-        if (IsNull.checkNull(student)) {
+        if (IsNull.checkNull(admin)) {
             HttpSession session = request.getSession();
-            session.setAttribute("flag", student.getFlag());
-            session.setAttribute("sno", student.getSno());
-            session.setAttribute("cno",student.getCno());
-            return ObjtoLayJson.objectToJson(cloums,student);
+            session.setAttribute("flag", admin.getFlag());
+            session.setAttribute("cno",admin.getCno());
+            return ObjtoLayJson.objectToJson(cloums,admin);
         } else {
             data = "{\"code\":\"300\",\"message\":\"登录失败,请检查用户名和密码\"}";
             return data;

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>登录页面</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link href="../static/layui/css/layui.css" media="all" rel="stylesheet">
+    <script charset="utf-8" src="../static/layui/layui.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+
+<body style="background-image: url(../static/images/loginbackground.jpg);">
+<div
+        style="border-radius: 20px; width: 500px; height: 300px; background:rgba(62, 103, 133, 0.8); margin: auto; float: left; top: 0; left: 0; right: 0; bottom: 0; position: absolute; padding: 30px 70px 30px 0;">
+    <div style="width: 100%; height: 50px; text-align: center; font-size: 30px; line-height: 50px; padding-left: 30px">
+        欢迎登录
+    </div>
+    <form action="" class="layui-form" style="margin-top: 40px">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input autocomplete="off" class="layui-input" lay-reqtext="用户名是必填项，岂能为空？" lay-verify="required" name="userName"
+                       placeholder="用户名" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input autocomplete="off" class="layui-input" lay-reqtext="密码是必填项，岂能为空？" lay-verify="required" name="password"
+                       placeholder="密码" type="password">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">账户类型</label>
+            <div class="layui-input-block">
+                <input checked="" name="type" title="学生" type="radio" value="2">
+                <input name="type" title="教师" type="radio" value="1">
+                <input name="type" title="管理员" type="radio" value="0">
+            </div>
+        </div>
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-filter="login" lay-submit="" style="width: 80%; margin-left: 25px; margin-top: 10px"
+                    type="submit">登录
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer,
+            form = layui.form;
+        form.render('radio');
+        form.on('submit(login)', function (data) {
+            var type = parseInt(data.field.type);
+            var url = '';
+            var data2={};
+            switch (type) {
+                case 0:
+                    url = '/User/teacherLogin';
+                    data2.cno=data.field.userName;
+                    data2.password=data.field.password;
+                    break;
+                case 1:
+                    url = '/User/teacherLogin';
+                    data2.cno=data.field.userName;
+                    data2.password=data.field.password;
+                    break;
+                case 2:
+                    url = '/User/studentLogin';
+                    data2.sno=data.field.userName;
+                    data2.password=data.field.password;
+            }
+            $.ajax({
+                type: "get", //指定提交的类型 get对应 doGet()方法，post--->doPost()犯法
+                url: url,    //传输地址的URL
+                data: data2,
+                dataType: 'JSON',
+                async: false, //success和error代表是否返回成功，既后台给前台传输数据是否成功
+                success: function (res)//success、error代表是否返回成功
+                {
+                    if (res.code == '200') {
+                        layer.msg("登录成功！");
+                        goPage(type);
+                    } else {
+                        layer.msg("登录失败，请检查用户名和密码是否正确！");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("网络错误！");
+                }
+            });
+            return false;
+        });
+
+        function goPage(type) {
+            switch (type) {
+                case 0:
+                    window.location.href = '/admin';
+                    break;
+                case 1:
+                    window.location.href = "/teacher";
+                    break;
+                case 2:
+                    window.location.href = "/student";
+                    break;
+            }
+        }
+    });
+</script>
+
+</html>

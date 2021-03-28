@@ -13,11 +13,11 @@
     <select id="selectAllAdm" resultMap="BaseResultMap">
         select * from admin
     </select>
-    <select id="adminLogin" resultMap="BaseResultMap">
+    <select id="adminLogin" resultMap="BaseResultMap" parameterType="cn.zcbigdata.mybits_demo.entity.Admin">
         select * from admin where cno=#{cno} and password=#{password}
     </select>
     <insert id="InsertAdm" parameterType="cn.zcbigdata.mybits_demo.entity.Admin">
-        insert into admin (name,password,sno,cno)
+        insert into admin (name,password,cno)
         values (#{name}, #{password},#{cno})
     </insert>
     <update id="UpdateAdm" parameterType="cn.zcbigdata.mybits_demo.entity.Admin">

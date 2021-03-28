@@ -25,13 +25,13 @@ public class StudentController {
     private static final String IS_STUDENT="4" ;
     @GetMapping("/selectAllStu")
     public String selectAllStu(HttpSession session) throws Exception {
-        String flag = session.getAttribute("flag").toString();
-        String data="{\"code\":\"300\",\"message\":\"失败\"}";
-        if(IS_ADMIN.equals(flag)){
+        //String flag = session.getAttribute("flag").toString();
+       String data="{\"code\":\"300\",\"message\":\"失败\"}";
+        //if(IS_ADMIN.equals(flag)){
             List<Student> students = studentService.selectAllStu();
             String[] colums={"id","name","password","sno","cno","flag"};
             data= ObjtoLayJson.ListtoJson(students,colums);
-        }
+       // }
         return data;
     }
     @GetMapping("/teacherSelectStu")
