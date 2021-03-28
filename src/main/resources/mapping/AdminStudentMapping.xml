@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zcbigdata.mybits_demo.mapper.AdminStudentMapper" >
+
+    <resultMap id="BaseResultMap" type="cn.zcbigdata.mybits_demo.entity.AdminStudent" >
+        <id      column="id"        property="id"        jdbcType="INTEGER" />
+        <result  column="name"  property="name"  jdbcType="VARCHAR" />
+        <result  column="password"  property="password"  jdbcType="VARCHAR" />
+        <result  column="sno"  property="sno"  jdbcType="VARCHAR" />
+        <result  column="cno"  property="cno"  jdbcType="VARCHAR" />
+        <result  column="flag"  property="flag"  jdbcType="VARCHAR" />
+
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,name,password,sno,cno,flag
+    </sql>
+
+    <insert id="insert" parameterType="cn.zcbigdata.mybits_demo.entity.AdminStudent" >
+        insert into student (name,password,sno)
+        values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{sno,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        limit #{param1},#{param2}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete
+        from student where id = #{id,jdbcType = INTEGER}
+    </delete>
+
+    <update id="update" parameterType="cn.zcbigdata.mybits_demo.entity.AdminStudent">
+        update student
+        set name = #{name,jdbcType = VARCHAR},password = #{password,jdbcType=VARCHAR},sno = #{sno,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectCount"  resultType="java.lang.Integer" >
+        SELECT count(*) FROM student;
+    </select>
+
+    <select id="login" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        where sno = #{param1,jdbcType = VARCHAR} and password = #{param2,jdbcType = VARCHAR}
+    </select>
+
+    <insert id="regist" parameterType="cn.zcbigdata.mybits_demo.entity.AdminStudent" >
+        insert into student (name,password,sno)
+        values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{sno,jdbcType=VARCHAR})
+    </insert>
+</mapper>
