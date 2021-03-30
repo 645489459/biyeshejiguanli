@@ -30,6 +30,14 @@ public class LoginController {
     public String login() throws Exception {
         return "login";
     }
+    @RequestMapping("/tostudent")
+    public String student() throws Exception {
+        return "sutdent";
+    }
+    @RequestMapping("/tostustu")
+    public String stustu() throws Exception {
+        return "stustu";
+    }
 
     @RequestMapping("/toRegister")
     public String toRegist() throws Exception {
@@ -56,6 +64,7 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute("flag", student.getFlag());
             session.setAttribute("sno", student.getSno());
+            System.out.println(session.getAttribute("flag")+"///"+session.getAttribute("sno"));
             return ObjtoLayJson.objectToJson(cloums,student);
         } else {
             data = "{\"code\":\"300\",\"message\":\"登录失败,请检查用户名和密码\"}";

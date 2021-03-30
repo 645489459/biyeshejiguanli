@@ -1,125 +1,111 @@
 package cn.zcbigdata.mybits_demo.Util;
 
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-
-/***
- * 	该类的主要功能是将对象类型，转换为layui能识别的json
- * @author Administrator
+/**
+ * Json工具类
  *
+ * @author yty
  */
 public class ObjtoLayJson {
-	
-	public static  String toJson(Object object,String[] colums) throws Exception {
-		 String[] dataRow = new String[colums.length];
-		//调用该Bean的get方法
-		Field[] fields = object.getClass().getDeclaredFields();
-		for (int i = 0; i < fields.length; i++) {
-			String fieldName = fields[i].getName();
-			String fistfont = fieldName.substring(0,1).toUpperCase();
-			String methodname = "get"+fistfont+fieldName.substring(1);
-			Method method = object.getClass().getMethod(methodname);
-			if (method.invoke(object) == null) {
-				dataRow[i] =  "null";
-			}else {
-				dataRow[i] =  method.invoke(object).toString();
-			}
-			System.out.println("get的输出结果："+method.invoke(object));
+
+	/**
+	 * 将list转换为layui风格的json
+	 *
+	 * @param fields String数组形式的字段列表
+	 * @param data   传入的列表，内容需要为javaBean格式的类
+	 * @return 返回转换好的json
+	 * @throws Exception 传入的字段列表或list内的对象格式不对抛出异常
+	 */
+	public static String listToLayJson(String[] fields, List<?> data, Long count) {
+		StringBuilder re = new StringBuilder();
+		if(count == null){
+			count = (long) data.size();
 		}
-		System.out.println(Arrays.toString(dataRow));
-		
-		String jsonStr = "[{\"status\":0}, {\"message\": \"成功\" }, {\"count\": 1000},{\"rows\":{\"item\":[";
-		for(int i = 0; i < dataRow.length; i++) {
-			String arr = "{";
-			if (dataRow[i] == null || "NULL".equals(dataRow[i]) ) {
-				arr += "\"\"";
-			}else {
-				arr += "\"" + colums[i] + "\""+":" ;
-				arr +=  "\"" + dataRow[i]+"\"";
-			}
-			
-			arr += "}";
-			if( i < dataRow.length - 1 ) {
-				arr += ",";
-			}
-			
-			jsonStr += arr;
-			
+		re.append("{\"code\":0,\"msg\":\"获取成功\",\"count\":");
+		re.append(count);
+		re.append(",\"data\":[");
+		if (data.isEmpty()) {
+			re.append("]}");
+			return re.toString();
 		}
-		
-		jsonStr += "]}}]";
-		return jsonStr;
+		for (Object object : data) {
+			try{
+				re.append(beanToJson(fields, object));
+			}catch (Exception e){
+				e.printStackTrace();
+				return Constants.FAIL_RETURN_JSON;
+			}
+			re.append(',');
+		}
+		re.deleteCharAt(re.length() - 1);
+		re.append("]}");
+		return re.toString();
 	}
-	
-	
-	public static  <T> String ListtoJson(List<T> objects,String[] colums) throws Exception {
-		String[][] dataRow = new String[objects.size()][colums.length];
-		int count = 0;
-		for (Object object : objects) {
-			Field[] fields = object.getClass().getDeclaredFields();
-			for (int i = 0; i < fields.length; i++) {
-				String fieldName = fields[i].getName();
-				String fistfont = fieldName.substring(0,1).toUpperCase();
-				String methodname = "get"+fistfont+fieldName.substring(1);
-				Method method = object.getClass().getMethod(methodname);
-				if (method.invoke(object) == null) {
-					dataRow[count][i] =  "null";
-				}else {
-					dataRow[count][i] =  method.invoke(object).toString();
-				}
-				
-			
-			}
-			count += 1;
+	/**
+	 * 将Object转换为layui风格的json
+	 *
+	 * @param fields String数组形式的字段列表
+	 * @param data   传入的列表，内容需要为javaBean格式的类
+	 * @return 返回转换好的json
+	 * @throws Exception 传入的字段列表或list内的对象格式不对抛出异常
+	 */
+	public static String objToLayJson(String[] fields, Object data) {
+		Long count=1L;
+		StringBuilder re = new StringBuilder();
+		re.append("{\"code\":0,\"msg\":\"获取成功\",\"count\":");
+		re.append(count);
+		re.append(",\"data\":[");
+		if (data==null) {
+			re.append("]}");
+			return re.toString();
 		}
-	
-		
-		
-		String jsonStr = "[{\"status\":0}, {\"message\": \"成功\" }, {\"count\": 1000},{\"rows\":{\"item\":[";
-		for(int i = 0; i < dataRow.length; i++) {
-			
-			String arr = "{";
-			for( int j = 0; j < dataRow[i].length; j++) {
-				System.out.println("j======"+j);
-				if(dataRow[i][j] == null || "NULL".equals(dataRow[i][j])) {
-					arr += "\"\"";
-				}else {
-					arr += "\"" + colums[j] + "\""+":" ;
-					arr +=  "\"" +dataRow[i][j] + "\"";
-				}
-			
-				if( j < dataRow[i].length - 1 ) {
-					arr += ",";
-				}
+
+			try{
+				re.append(beanToJson(fields, data));
+			}catch (Exception e){
+				e.printStackTrace();
+				return Constants.FAIL_RETURN_JSON;
 			}
-			arr += "}";
-			if( i < dataRow.length - 1) {
-				arr += ",";
-			}
-			
-			jsonStr += arr;
+			re.append(',');
+
+		re.deleteCharAt(re.length() - 1);
+		re.append("]}");
+		return re.toString();
+	}
+
+	/**
+	 * 将list转换为json
+	 *
+	 * @param fields String数组形式的字段列表
+	 * @param data   传入的列表，内容需要为javaBean格式的类
+	 * @return 返回转换好的json
+	 */
+	public static String listToJson(String[] fields, List<?> data) {
+		StringBuilder re = new StringBuilder();
+		re.append("{\"code\":200,\"msg\":\"成功\",\"data\":[");
+		if (data == null || data.isEmpty()) {
+			re.append("]}");
+			return re.toString();
 		}
-		jsonStr += "]}}]";
-		return jsonStr;
+		for (Object object : data) {
+			try {
+				re.append(beanToJson(fields, object));
+				re.append(',');
+			} catch (Exception e) {
+				e.printStackTrace();
+				return Constants.FAIL_RETURN_JSON;
+			}
+		}
+		re.deleteCharAt(re.length() - 1);
+		re.append("]}");
+		return re.toString();
 	}
-	
-	public static void main(String[] args) throws Exception {
-//		User user = new User();
-//		user.setAge(18);
-//		user.setId(1);
-//		user.setPassword("123456789");
-//		String[] colums = {"id","userName","Password","age"};
-////		String  jsonString = toJson(user,colums);
-////		System.out.println(jsonString);
-//		List<Object> users = new ArrayList<Object>();
-//		users.add(user);
-//		users.add(user);
-//		String helloString = ListtoJson(users,colums);
-//		System.out.println(helloString);
-	}
+
 	/**
 	 * 将javaBean对象转换为带有状态码和消息的json
 	 *
@@ -132,10 +118,11 @@ public class ObjtoLayJson {
 			return "{\"code\":200,\"msg\":\"成功\",\"data\":" + beanToJson(fields, object) + '}';
 		}catch (Exception e){
 			e.printStackTrace();
-			return "{\"code\":\"300\",\"message\":\"失败\"}";
+			return Constants.FAIL_RETURN_JSON;
 		}
 
 	}
+
 	/**
 	 * 将javaBean对象转换为简单的json
 	 *
@@ -180,4 +167,5 @@ public class ObjtoLayJson {
 		jsonStr.append('}');
 		return jsonStr.toString();
 	}
+
 }

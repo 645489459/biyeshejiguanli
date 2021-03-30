@@ -31,7 +31,7 @@ public class SystemConentController {
         if (SessionUtils.checkLogin(session,7)){
             String []cloums={"id","content"};
             List<SystemContent> systemContents=systemContentService.selectSys();
-            data= ObjtoLayJson.ListtoJson(systemContents,cloums);
+            data= ObjtoLayJson.listToLayJson(cloums,systemContents,100L);
         }
 
         return data;

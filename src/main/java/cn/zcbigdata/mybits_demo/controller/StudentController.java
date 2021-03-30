@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class StudentController {
         //if(IS_ADMIN.equals(flag)){
             List<Student> students = studentService.selectAllStu();
             String[] colums={"id","name","password","sno","cno","flag"};
-            data= ObjtoLayJson.ListtoJson(students,colums);
+            data= ObjtoLayJson.listToLayJson(colums,students,100L);
        // }
         return data;
     }
@@ -42,7 +43,7 @@ public class StudentController {
             String cno=session.getAttribute("cno").toString();
             List<Student> students=studentService.teacherSelectStu(cno);
             String[] colums={"id","name","password","sno","cno","flag"};
-            data=ObjtoLayJson.ListtoJson(students,colums);
+            data=ObjtoLayJson.listToLayJson(colums,students,100L);
         }
         return data;
     }
@@ -52,9 +53,11 @@ public class StudentController {
         String data="{\"code\":\"300\",\"message\":\"失败\"}";
         if (IS_STUDENT.equals(flag)){
             String sno=session.getAttribute("sno").toString();
+            System.out.println(sno);
             Student student= studentService.studentSelectStu(sno);
             String[] colums={"id","name","password","sno","cno","flag"};
-            data=ObjtoLayJson.toJson(student,colums);
+            data=ObjtoLayJson.objToLayJson(colums,student);
+
         }
 
         return data;

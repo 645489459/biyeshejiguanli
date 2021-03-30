@@ -29,7 +29,7 @@ public class AdminController {
         if (IS_ADMIN.equals(flag)){
             List<Admin> admins=adminService.selectAllAdm();
             String []cloms={"id","name","password","cno","flag"};
-            data= ObjtoLayJson.ListtoJson(admins,cloms);
+            data= ObjtoLayJson.listToLayJson(cloms,admins,100L);
        }
 
         return data;
