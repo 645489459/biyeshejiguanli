@@ -51,4 +51,16 @@ public class OpeningReportController {
         }
         return data;
     }
+    @GetMapping("/selectOpeRep")
+    public String selectOpeRep(HttpSession session){
+        String flag=session.getAttribute("flag").toString();
+        String data = "{\"code\":\"300\",\"message\":\"失败\"}";
+        if (Constants.ROLE_SALESMAN_STR.equals(flag)){
+            String sno=session.getAttribute("sno").toString();
+            ReportPaperVo openingReportVos=openingReportService.selectOpeRep(sno);
+            String[] cloums={"ope_title_id","sno","name","cno","cnotent","remark","status"};
+            data= ObjtoLayJson.objToLayJson(cloums,openingReportVos);
+        }
+        return data;
+    }
 }

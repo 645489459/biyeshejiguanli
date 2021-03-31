@@ -23,6 +23,11 @@
         from final_paper or inner join student stu on st.sno=stu.sno
         where stu.cno=#{cno}
     </select>
+    <select id="selectFinPap" resultMap="VoMap" parameterType="java.lang.String">
+        select or.id as ope_title_id ,or.sno,stu.cno,stu.name,or.content,or.status,or.remark
+        from final_paper or inner join student stu on st.sno=stu.sno
+        where stu.sno=#{sno}
+    </select>
     <insert id="InsertFinPap" parameterType="cn.zcbigdata.mybits_demo.entity.FinalPaper">
         insert into final_paper (sno,content)
         values (#{sno}, #{content})

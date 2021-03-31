@@ -46,4 +46,15 @@ public class OpeningReportServiceimpl implements OpeningReportService {
     public int updateOpeRep(OpeningReport openingReport) {
         return this.openingReportMapper.updateOpeRep(openingReport);
     }
+
+    /**
+     * 学生查询开题报告
+     *
+     * @param sno
+     * @return
+     */
+    @Override
+    public ReportPaperVo selectOpeRep(String sno ) {
+        return this.openingReportMapper.selectOpeRep(sno);
+    }
 }

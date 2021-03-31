@@ -23,6 +23,11 @@
         from middle_paper or inner join student stu on st.sno=stu.sno
         where stu.cno=#{cno}
     </select>
+    <select id="selectMidPap" resultMap="VoMap" parameterType="java.lang.String">
+        select or.id as ope_title_id ,or.sno,stu.cno,stu.name,or.content,or.status,or.remark
+        from middle_paper or inner join student stu on st.sno=stu.sno
+        where stu.sno=#{sno}
+    </select>
     <insert id="InsertMidPap" parameterType="cn.zcbigdata.mybits_demo.entity.MiddlePaper">
         insert into middle_paper (sno,content)
         values (#{sno}, #{content})

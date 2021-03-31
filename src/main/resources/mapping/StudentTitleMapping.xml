@@ -22,6 +22,11 @@
         from student_title st inner join student stu on st.sno=stu.sno
         where stu.cno=#{cno}
     </select>
+    <select id="selectStuTit" resultMap="VoMap" parameterType="java.lang.String">
+        select st.id as stu_title_id ,st.sno,stu.cno,stu.name,st.content,st.status
+        from student_title st inner join student stu on st.sno=stu.sno
+        where stu.sno=#{sno}
+    </select>
     <insert id="InsertStuTit" parameterType="cn.zcbigdata.mybits_demo.entity.StudentTitle">
         insert into student_title (sno,content)
         values (#{sno}, #{content})
@@ -31,7 +36,11 @@
         set status = #{status},
         where id = #{id}
     </update>
-
+    <update id="updateTit" parameterType="cn.zcbigdata.mybits_demo.entity.StudentTitle">
+        update student_title
+        set content = #{content},
+            where id = #{id}
+    </update>
 
 
 </mapper>

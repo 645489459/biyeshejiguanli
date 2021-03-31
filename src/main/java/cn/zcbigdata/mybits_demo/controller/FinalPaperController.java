@@ -34,6 +34,18 @@ public class FinalPaperController {
         }
         return data;
     }
+    @GetMapping("/selectFinPap")
+    public String selectFinPap(HttpSession session){
+        String flag=session.getAttribute("flag").toString();
+        String data = "{\"code\":\"300\",\"message\":\"失败\"}";
+        if (Constants.ROLE_SALESMAN_STR.equals(flag)){
+            String sno=session.getAttribute("sno").toString();
+            ReportPaperVo openingReportVos=finalPqperService.selectFinPap(sno);
+            String[] cloums={"ope_title_id","sno","name","cno","cnotent","remark","status"};
+            data= ObjtoLayJson.objectToJson(cloums,openingReportVos);
+        }
+        return data;
+    }
     @GetMapping("/updateMidPap")
     public String updateFinPap(HttpSession session, @RequestParam Integer id, @RequestParam String status){
         String flag = session.getAttribute("flag").toString();

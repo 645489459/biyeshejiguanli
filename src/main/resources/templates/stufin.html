@@ -37,7 +37,7 @@
 
         table.render({
             elem: '#test'
-            ,url:'http://localhost:8080/student/studentSelectStu'
+            ,url:'http://localhost:8080/FinalPaper/selectFinPap'
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
                 title: '提示'
@@ -47,14 +47,16 @@
             ,title: '用户数据表'
             ,cols: [
                 [
-                {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'name', width:80, title: '姓名'}
-                ,{field:'password', width:80, title: '密码'}
-                ,{field:'sno', width:80, title: '学号'}
-                ,{field:'cno', title: '教师学号', minWidth: 100}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-            ]
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field:'id', width:80, title: 'ID', sort: true}
+                    ,{field:'name', width:80, title: '姓名'}
+                    ,{field:'sno', width:80, title: '学号'}
+                    ,{field:'cno', title: '教师学号', minWidth: 100}
+                    ,{field:'content', width:80, title: '内容'}
+                    ,{field:'remark', title: '教师评语', minWidth: 100}
+                    ,{field:'status', title: '状态', minWidth: 100}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ]
             ]
             ,page: false
             ,response:{

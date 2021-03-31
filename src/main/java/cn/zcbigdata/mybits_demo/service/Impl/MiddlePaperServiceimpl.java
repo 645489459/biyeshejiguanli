@@ -26,6 +26,17 @@ public class MiddlePaperServiceimpl implements MiddlePaperService {
     }
 
     /**
+     * 学生查看中期论文情况
+     *
+     * @param sno
+     * @return OpeningReportVo类型
+     */
+    @Override
+    public ReportPaperVo selectMidPap(String sno) {
+        return this.middlePaperMapper.selectMidPap(sno);
+    }
+
+    /**
      * 学生添加开题报告内容
      *
      * @param middlePaper

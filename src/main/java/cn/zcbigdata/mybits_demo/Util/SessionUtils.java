@@ -12,8 +12,8 @@ public class SessionUtils {
      */
     public static boolean checkLogin(HttpSession session, int roleId) {
         String useridStr = (String) session.getAttribute("userId");
-        String roleIdStr = (String) session.getAttribute("roleId");
-        if (useridStr == null || roleIdStr == null) {
+        String roleIdStr = (String) session.getAttribute("flag");
+        if (roleIdStr == null) {
             return false;
         }
         switch (roleId) {

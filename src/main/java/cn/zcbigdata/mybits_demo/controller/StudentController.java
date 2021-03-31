@@ -53,7 +53,6 @@ public class StudentController {
         String data="{\"code\":\"300\",\"message\":\"失败\"}";
         if (IS_STUDENT.equals(flag)){
             String sno=session.getAttribute("sno").toString();
-            System.out.println(sno);
             Student student= studentService.studentSelectStu(sno);
             String[] colums={"id","name","password","sno","cno","flag"};
             data=ObjtoLayJson.objToLayJson(colums,student);

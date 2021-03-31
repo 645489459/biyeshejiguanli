@@ -14,6 +14,12 @@ public interface StudentTitleMapper {
     List<StudentTitleVo> selectStuTitList(String cno);
 
     /**
+     * 学生查询自己的选题情况
+     * @param sno
+     * @return
+     */
+    StudentTitleVo selectStuTit(String sno);
+    /**
      *  教师评判选题是否通过
      * @param studentTitle
      * @return int 对象
@@ -26,5 +32,12 @@ public interface StudentTitleMapper {
      * @return int对象
      */
     int InsertStuTit(StudentTitle studentTitle);
+
+    /**
+     * 学生修改选题内容
+     * @param studentTitle
+     * @return int对象
+     */
+    int updateTit(StudentTitle studentTitle);
 
 }

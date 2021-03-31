@@ -12,7 +12,12 @@ public interface FinalPqperService {
      * @return OpeningReportVo类型
      */
     List<ReportPaperVo> selectFinPapList(String cno);
-
+    /**
+     * 学生查看最终论文情况
+     * @param sno
+     * @return OpeningReportVo类型
+     */
+    ReportPaperVo selectFinPap(String sno);
     /**
      * 学生添加开题报告内容
      * @param finalPaper

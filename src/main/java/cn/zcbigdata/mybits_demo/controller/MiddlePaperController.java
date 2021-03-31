@@ -32,6 +32,18 @@ public class MiddlePaperController {
         }
         return data;
     }
+    @GetMapping("/selectMidPap")
+    public String selectMidPap(HttpSession session){
+        String flag=session.getAttribute("flag").toString();
+        String data = "{\"code\":\"300\",\"message\":\"失败\"}";
+        if (Constants.ROLE_SALESMAN_STR.equals(flag)){
+            String sno=session.getAttribute("sno").toString();
+            ReportPaperVo openingReportVos=middlePaperService.selectMidPap(sno);
+            String[] cloums={"ope_title_id","sno","name","cno","cnotent","remark","status"};
+            data= ObjtoLayJson.objectToJson(cloums,openingReportVos);
+        }
+        return data;
+    }
     @GetMapping("/updateMidPap")
     public String updateMidPap(HttpSession session, @RequestParam Integer id, @RequestParam String status){
         String flag = session.getAttribute("flag").toString();

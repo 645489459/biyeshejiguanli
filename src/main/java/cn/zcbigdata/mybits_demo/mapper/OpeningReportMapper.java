@@ -29,4 +29,11 @@ public interface OpeningReportMapper {
      * @return
      */
     int updateOpeRep(OpeningReport openingReport);
+
+    /**
+     * 学生查询开题报告
+     * @param reportPaperVo
+     * @return
+     */
+    ReportPaperVo selectOpeRep(String sno);
 }

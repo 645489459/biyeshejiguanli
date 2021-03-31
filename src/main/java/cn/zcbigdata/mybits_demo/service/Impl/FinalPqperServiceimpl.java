@@ -26,6 +26,17 @@ public class FinalPqperServiceimpl implements FinalPqperService {
     }
 
     /**
+     * 学生查看最终论文情况
+     *
+     * @param sno
+     * @return OpeningReportVo类型
+     */
+    @Override
+    public ReportPaperVo selectFinPap(String sno) {
+        return this.finalPaperMapper.selectFinPap(sno);
+    }
+
+    /**
      * 学生添加开题报告内容
      *
      * @param finalPaper

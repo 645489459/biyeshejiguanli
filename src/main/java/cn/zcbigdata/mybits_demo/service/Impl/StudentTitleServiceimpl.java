@@ -26,6 +26,17 @@ public class StudentTitleServiceimpl implements StudentTitleService {
     }
 
     /**
+     * 学生查询自己的选题情况
+     *
+     * @param sno
+     * @return
+     */
+    @Override
+    public StudentTitleVo selectStuTit(String sno) {
+        return this.studentTitleMapper.selectStuTit(sno);
+    }
+
+    /**
      * 教师评判选题是否通过
      *
      * @param studentTitle
@@ -45,5 +56,16 @@ public class StudentTitleServiceimpl implements StudentTitleService {
     @Override
     public int InsertStuTit(StudentTitle studentTitle) {
         return this.studentTitleMapper.InsertStuTit(studentTitle);
+    }
+
+    /**
+     * 学生修改选题内容
+     *
+     * @param studentTitle
+     * @return int对象
+     */
+    @Override
+    public int updateTit(StudentTitle studentTitle) {
+        return this.studentTitleMapper.updateTit(studentTitle);
     }
 }
