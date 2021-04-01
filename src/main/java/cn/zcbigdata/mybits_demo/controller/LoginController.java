@@ -36,14 +36,26 @@ public class LoginController {
         return "sutdent";
     }
     @RequestMapping("/tostustu")
-    public String stustu()  {
-        return "stustu";
-    }
+    public String stustu()  { return "stustu"; }
 
     @RequestMapping("/toRegister")
-    public String toRegist()  {
-        return "regist";
+    public String toRegist()  { return "regist";}
+
+    @RequestMapping("/tostufin")
+    public String tostufin()  {
+        return "stufin";
     }
+
+    @RequestMapping("/tostuope")
+    public String tostuope()  {
+        return "stuope";
+    }
+
+    @RequestMapping("/tostumid")
+    public String tostumid()  {
+        return "stumid";
+    }
+
     @RequestMapping("/tostutit")
     public String tostutit()  {
         return "stutit";
