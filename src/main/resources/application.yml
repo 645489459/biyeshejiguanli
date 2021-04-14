@@ -9,7 +9,13 @@ spring:
     password: Lz645489
   thymeleaf:
     prefix:
-         classpath: /templates/
+      classpath: /templates/
+    servlet:
+      multipart:
+        #单个文件最大上传大小
+        max-file-size: 10MB
+        #每次请求上传文件大小最大值
+        max-request-size: 30MB
   #静态资源访问路径：用于告诉Spring Boot应该在何处查找静态资源文件,查找文件时会依赖于配置的先后顺序依次进行
   mvc:
     static-path-pattern: /static/**
@@ -26,5 +32,11 @@ logging:
   level:
     com:
       example:
-        mapper : debug
+        mapper: debug
 
+
+
+#自定义参数
+define:
+  nginx:
+    path: D:\uploadFile\
